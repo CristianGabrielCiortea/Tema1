@@ -1,4 +1,4 @@
-﻿
+﻿using System.Text;
 
 namespace ExercitiiSet1
 {
@@ -54,6 +54,8 @@ namespace ExercitiiSet1
 
     public static class Exercise3
     {
+        /*Scrieti o metoda prin care sa schimbati valoarea a doua variabile intre ele, dar fara a va folosi 
+          de o a treia variabila. */
         public static void Swap(ref int x, ref int y)
         {
             x += y;
@@ -82,6 +84,43 @@ namespace ExercitiiSet1
             x = x.Substring(y.Length);
         }
 
+    }
+
+    public static class Exercise4
+    {
+        /*Scrieti o metoda care afiseaza numarul de aparitii a fiecarui caracter dintr-un string nenull. */
+        public static string DisplayCharacterOccurrences(string text)
+        {
+            if (text == null) return "null";
+
+            text = text.Trim();
+            StringBuilder stringBuilder = new StringBuilder();
+
+            char character = text[0];
+            int count = 1;
+            for(int i = 1; i < text.Length; i++)
+            {
+                if (character == text[i])
+                {
+                    count++;
+                }
+                else
+                {
+                    stringBuilder.Append(character);
+                    stringBuilder.Append(count);
+                    if(Char.IsWhiteSpace(text[i]))
+                    {
+                        stringBuilder.Append(text[i]);
+                        i++;
+                    }
+                    character = text[i];
+                    count = 1;
+                }
+
+            }
+
+            return stringBuilder.ToString();
+        }
     }
 
     public class Program
@@ -126,6 +165,12 @@ namespace ExercitiiSet1
             Console.WriteLine("Swapping..");
             Exercise3.Swap(ref a3, ref b3);
             Console.WriteLine(@"a={0}, b={1}", a3, b3);
+
+            string text1 = "aaanna issss attt ssschhoooool";
+            string text2 = "jjjooon iiis llllooookingggg outsiddeeee thheeee winnnnddddooowww";
+
+            Console.WriteLine(@"DisplayCharacterOccurrences('{0})={1}", text1, Exercise4.DisplayCharacterOccurrences(text1));
+            Console.WriteLine(@"DisplayCharacterOccurrences('{0})={1}", text2, Exercise4.DisplayCharacterOccurrences(text2));
 
         }
     }
