@@ -42,9 +42,11 @@ namespace ExercitiiSet1
 
     public static class Exercise2
     {
-        /*Determinati daca o secventa de caractere primita ca date de intrare reprezinta o propozitie
-         holoalfabetica(o pangrama = un text care foloseste toate literele alfabetului, in cazul nostru
-         alegem limba engleza).*/
+        /*
+        Determinati daca o secventa de caractere primita ca date de intrare reprezinta o propozitie
+        holoalfabetica(o pangrama = un text care foloseste toate literele alfabetului, in cazul nostru
+        alegem limba engleza).
+        */
         public static bool IsPanagram(string text)
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -54,8 +56,10 @@ namespace ExercitiiSet1
 
     public static class Exercise3
     {
-        /*Scrieti o metoda prin care sa schimbati valoarea a doua variabile intre ele, dar fara a va folosi 
-          de o a treia variabila. */
+        /*
+        Scrieti o metoda prin care sa schimbati valoarea a doua variabile intre ele, dar fara a va folosi 
+        de o a treia variabila. 
+        */
         public static void Swap(ref int x, ref int y)
         {
             x += y;
@@ -98,7 +102,7 @@ namespace ExercitiiSet1
 
             char character = text[0];
             int count = 1;
-            for(int i = 1; i < text.Length; i++)
+            for (int i = 1; i < text.Length; i++)
             {
                 if (character == text[i])
                 {
@@ -108,7 +112,7 @@ namespace ExercitiiSet1
                 {
                     stringBuilder.Append(character);
                     stringBuilder.Append(count);
-                    if(Char.IsWhiteSpace(text[i]))
+                    if (Char.IsWhiteSpace(text[i]))
                     {
                         stringBuilder.Append(text[i]);
                         i++;
@@ -120,6 +124,80 @@ namespace ExercitiiSet1
             }
 
             return stringBuilder.ToString();
+        }
+    }
+
+    public static class Exercise5
+    {
+        /*
+        Pornind de la jocul loto 6 din 49, creati un program care simuleaza o runda de jos. Participantul
+        introduce 6 numere (intre 1 si 49), iar programul ii raspunde daca este sau nu castigator. Jocul
+        este castigat daca numerele introduse de participant sunt aceleasi generate aleator de
+        program. Tineti cont ca ordinea nu trebuie sa fie aceeasi.
+         */
+        public static void StartLotto()
+        {
+            List<int> playerNumbers = new List<int>();
+            Console.WriteLine("Welcome to Lotto!");
+            Console.WriteLine("Please choose your numbers!");
+
+            for (int i = 0; i < 6; i++)
+            {
+                Console.WriteLine(@"Number {0} is: ", i + 1);
+                int number;
+                try
+                {
+                    number = Convert.ToInt32(Console.ReadLine());
+                    if (playerNumbers.Contains(number))
+                    {
+                        Console.WriteLine("You already chose this number, try another one!");
+                        i--;
+                    }
+                    else
+                    {
+                        playerNumbers.Add(number);
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input, please try again!");
+                    i--;
+                }
+            }
+            Console.WriteLine("Your numbers are: ");
+            playerNumbers.ForEach(number => Console.Write(number + " "));
+            Console.WriteLine("\nThe winning numbers are: ");
+            var winnerNumbers = GenerateRandomNumbers(1, 69, 6);
+            winnerNumbers.ForEach(number => Console.Write(number + " "));
+
+            if (winnerNumbers.Except(playerNumbers).Count() == 0)
+            {
+                Console.WriteLine("\nCongratulations! You won!");
+            }
+            else
+            {
+                Console.WriteLine("\nYou lost :( Better luck next time!");
+            }
+        }
+
+        private static List<int> GenerateRandomNumbers(int min, int max, int count)
+        {
+            List<int> randomNumbers = new List<int>();
+            Random random = new Random();
+            for (int i = 0; i < count; i++)
+            {
+                var number = random.Next(min, max);
+                if (randomNumbers.Contains(number))
+                {
+                    i--;
+                }
+                else
+                {
+                    randomNumbers.Add(number);
+                }
+            }
+
+            return randomNumbers;
         }
     }
 
@@ -166,11 +244,17 @@ namespace ExercitiiSet1
             Exercise3.Swap(ref a3, ref b3);
             Console.WriteLine(@"a={0}, b={1}", a3, b3);
 
+            //Exercise 4
             string text1 = "aaanna issss attt ssschhoooool";
             string text2 = "jjjooon iiis llllooookingggg outsiddeeee thheeee winnnnddddooowww";
 
+            Console.WriteLine("\n");
             Console.WriteLine(@"DisplayCharacterOccurrences('{0})={1}", text1, Exercise4.DisplayCharacterOccurrences(text1));
             Console.WriteLine(@"DisplayCharacterOccurrences('{0})={1}", text2, Exercise4.DisplayCharacterOccurrences(text2));
+
+            //Exercise 5
+            Console.WriteLine("\n");
+            Exercise5.StartLotto();
 
         }
     }
