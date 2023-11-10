@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using ExercitiiSet1.Exercise7;
+using System.Text;
 
 namespace ExercitiiSet1
 {
@@ -87,7 +88,6 @@ namespace ExercitiiSet1
             y = x.Substring(0, x.Length - y.Length);
             x = x.Substring(y.Length);
         }
-
     }
 
     public static class Exercise4
@@ -201,17 +201,56 @@ namespace ExercitiiSet1
         }
     }
 
+    public static class Exercise6
+    {
+        /*
+        Pornind de la o lista de nume de elevi, afisati:
+        */
+
+        /*a. Alfabetic toate numele ce contin cel putin o data litera a.*/
+        public static List<string> OrderElementsThatContainCharacter(List<string> strings, char character)
+        {
+            return strings.Where(element => element.Contains(character)).OrderBy(element => element).ToList();
+        }
+
+        /*b. Toate numele care au cel putin 5 litere.*/
+        public static List<string> DeleteElementsThatDontRespectSize(List<string> strings, int size) 
+        {
+            return strings.Where(element => element.Length >= size).ToList();
+        }
+
+        /*c. Numele cel mai scurt din lista.*/
+        public static string FindMaximumLengthElement(List<string> strings)
+        {
+            return strings.MaxBy(element => element.Length);
+        }
+
+        /*d. Numele cel mai lung din lista.*/
+        public static string FindMinimumLengthElement(List<string> strings)
+        {
+            return strings.MinBy(element => element.Length);
+        }
+
+        /*e. Numarul de aparitii al numelui Alina in lista data.*/
+        public static int CountNumberOfOccurrences(List<string> strings, string element)
+        {
+            return strings.Count(s => s.Equals(element));
+        }
+    }
+
     public class Program
     {
         static void Main(string[] args)
         {
             //Exercise 1
+            Console.WriteLine("Exercise 1:");
             Console.WriteLine(@"Sum(5,10)={0}", Exercise1.Sum(5, 10));
             Console.WriteLine(@"SumWithoutPlus(5,10)={0}", Exercise1.SumWithoutPlus(5, 10));
             Console.WriteLine(@"Sum(2.7,7.3)={0}", Exercise1.Sum(2.7, 7.3));
             Console.WriteLine(@"Sum(3,4,5,6,7,8,9,10)={0}", Exercise1.Sum(3, 4, 5, 6, 7, 8, 9, 10));
 
             //Exercise 2
+            Console.WriteLine("Exercise 2:");
             var panagram1 = "The quick brown fox jumps over the lazy dog";
             var panagram2 = "The five boxing wizards jump quickly";
             var panagram3 = "The cat is sleeping on the couch.";
@@ -222,6 +261,7 @@ namespace ExercitiiSet1
             Console.WriteLine(@"IsPanagram('{0}')={1}", panagram3, Exercise2.IsPanagram(panagram3));
 
             //Exercise 3
+            Console.WriteLine("Exercise 3:");
             int a1 = 2, b1 = 3;
 
             Console.WriteLine("\n");
@@ -245,6 +285,7 @@ namespace ExercitiiSet1
             Console.WriteLine(@"a={0}, b={1}", a3, b3);
 
             //Exercise 4
+            Console.WriteLine("Exercise 4:");
             string text1 = "aaanna issss attt ssschhoooool";
             string text2 = "jjjooon iiis llllooookingggg outsiddeeee thheeee winnnnddddooowww";
 
@@ -253,9 +294,69 @@ namespace ExercitiiSet1
             Console.WriteLine(@"DisplayCharacterOccurrences('{0})={1}", text2, Exercise4.DisplayCharacterOccurrences(text2));
 
             //Exercise 5
+            Console.WriteLine("Exercise 5:");
             Console.WriteLine("\n");
             Exercise5.StartLotto();
+            Console.WriteLine("\n");
 
+            //Exercise 6
+            Console.WriteLine("Exercise 6:");
+            List<string> students = new List<string>()
+            {
+                "Marcel",
+                "Ioana",
+                "Alina",
+                "Florentin",
+                "Ion",
+                "Anamaria",
+                "Alina",
+                "Cristian",
+                "Andrei",
+                "Diana",
+                "Bogdan",
+                "Alina",
+                "Ana",
+                "Bob"
+            };
+
+            Exercise6.OrderElementsThatContainCharacter(students, 'a').ForEach(x => Console.Write(x + " "));
+            Console.WriteLine();
+            Exercise6.DeleteElementsThatDontRespectSize(students, 5).ForEach(x => Console.Write(x + " "));
+            Console.WriteLine();
+            Console.WriteLine(Exercise6.FindMaximumLengthElement(students));
+            Console.WriteLine(Exercise6.FindMinimumLengthElement(students));
+            Console.WriteLine("Number of occurrences of 'Alina' is: " + Exercise6.CountNumberOfOccurrences(students, "Alina"));
+            Console.WriteLine();
+
+            //Exercise 7
+            Console.WriteLine("Exercise 7:");
+            Student student1 = new Student("Cristian", "Ciortea", "12345", "UNITBV", "Informatica");
+            Student student2 = new Student("Andrei", "Popescu", "54321", "UNITBV", "Informatica");
+            Student student3 = new Student("Mihai", "Eminescu", "01234", "UNITBV", "Informatica");
+            Teacher teacher1 = new Teacher("Florentin", "Popovici", "010101", "UNITBV", "Informatica");
+            Teacher teacher2 = new Teacher("Andreea", "Istrate", "111111", "UNITBV", "Informatica");
+            Course course1 = new Course("Algoritmi fundamentali", 120, 90, teacher1);
+            Course course2 = new Course("Baze de date", 90, 110, teacher2);
+            teacher1.Courses.Add(course1);
+            teacher2.Courses.Add(course2);
+            course1.Students.Add(student1);
+            course1.Students.Add(student2);
+            course1.Students.Add(student3);
+            course2.Students.Add(student1);
+            course2.Students.Add(student2);
+            course2.Students.Add(student3);
+            student1.Courses[course1] = 5;
+            student2.Courses[course1] = 7;
+            student3.Courses[course1] = 10;
+            student1.Courses[course2] = 8;
+            student2.Courses[course2] = 9;
+            student3.Courses[course2] = 9;
+
+            student1.ShowInformation();
+            student2.ShowInformation();
+            student3.ShowInformation();
+            teacher1.ShowInformation();
+            teacher2.ShowInformation();
         }
     }
 }
