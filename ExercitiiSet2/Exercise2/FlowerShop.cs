@@ -116,19 +116,29 @@
             {
                 int dailyTotal = 0;
                 Console.WriteLine($"Day {i} of November: ");
-                Console.WriteLine($"{dailyRosesSold} roses sold for a total of {dailyRosesSold * _flowers[0].Price} RON");
-                Console.WriteLine($"{dailyGladiolasSold} gladiolas sold for a total of {dailyGladiolasSold * _flowers[0].Price} RON");
-                Console.WriteLine($"{dailyHydrangeasSold} hydrangeas sold for a total of {dailyHydrangeasSold * _flowers[0].Price}  RON");
-                Console.WriteLine($"{dailySmallBouqetsSold} small bouqets sold for a total of {dailySmallBouqetsSold * smallBouqetPrice} RON");
-                Console.WriteLine($"{dailyMediumBouqetsSold} medium bouqets sold for a total of {dailyMediumBouqetsSold * mediumBouqetPrice}  RON");
-                Console.WriteLine($"{dailyBigBouqetsSold} big bouqets sold for a total of {dailyBigBouqetsSold * bigBouqetPrice}  RON");
-                dailyTotal = dailyRosesSold * _flowers[0].Price + dailyGladiolasSold * _flowers[0].Price +
-                    dailyHydrangeasSold * _flowers[0].Price + dailySmallBouqetsSold * smallBouqetPrice +
-                    dailyMediumBouqetsSold * mediumBouqetPrice + dailyBigBouqetsSold * bigBouqetPrice;
-                Console.WriteLine($"Daily total is: {dailyTotal} RON");
+
+                int rosesRevenue = dailyRosesSold * _flowers[0].Price;
+                int gladiolasRevenue = dailyGladiolasSold * _flowers[1].Price;
+                int hydrangeasRevenue = dailyHydrangeasSold * _flowers[2].Price;
+                int smallBouqetsRevenue = dailySmallBouqetsSold * smallBouqetPrice;
+                int mediumBouqetsRevenue = dailyMediumBouqetsSold * mediumBouqetPrice;
+                int bigBouqetsRevenue = dailyBigBouqetsSold * bigBouqetPrice;
+
+                Console.WriteLine($"{dailyRosesSold} roses sold for a total of {rosesRevenue} RON");
+                Console.WriteLine($"{dailyGladiolasSold} gladiolas sold for a total of {gladiolasRevenue} RON");
+                Console.WriteLine($"{dailyHydrangeasSold} hydrangeas sold for a total of {hydrangeasRevenue} RON");
+                Console.WriteLine($"{dailySmallBouqetsSold} small bouquets sold for a total of {smallBouqetsRevenue} RON");
+                Console.WriteLine($"{dailyMediumBouqetsSold} medium bouquets sold for a total of {mediumBouqetsRevenue} RON");
+                Console.WriteLine($"{dailyBigBouqetsSold} big bouquets sold for a total of {bigBouqetsRevenue} RON");
+
+                dailyTotal = rosesRevenue + gladiolasRevenue + hydrangeasRevenue + smallBouqetsRevenue + mediumBouqetsRevenue + bigBouqetsRevenue;
+                Console.WriteLine($"Daily total sales: {dailyTotal} RON");
                 total += dailyTotal;
             }
-            Console.WriteLine($"The total for mounth November is {total} RON");
+
+            Console.WriteLine($"The total sales for month November is {total} RON");
         }
+
     }
+}
 }
