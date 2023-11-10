@@ -68,9 +68,9 @@
                 return;
             }
             Console.WriteLine("Enter the name of the animal:");
-            string name = Console.ReadLine();
+            string? name = Console.ReadLine();
             Console.WriteLine("Enter the type of the animal (Dog/Cat):");
-            string typeString = Console.ReadLine();
+            string? typeString = Console.ReadLine();
             AnimalType type;
             if (Enum.TryParse<AnimalType>(typeString, out type))
             {
@@ -99,7 +99,7 @@
                 Console.WriteLine("The shelter is empty! You cannot adopt!:(");
             }
             Console.WriteLine("Enter the name of the animal to remove:");
-            string nameToRemove = Console.ReadLine();
+            string? nameToRemove = Console.ReadLine();
             var animalToRemove = _animals.FirstOrDefault(animal => animal.Name == nameToRemove);
             if (animalToRemove != null)
             {

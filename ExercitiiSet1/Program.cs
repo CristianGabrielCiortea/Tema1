@@ -14,7 +14,6 @@ namespace ExercitiiSet1
         /*b.Calculati suma numerelor fara a folosi operatorul “+”.*/
         public static int SumWithoutPlus(int x, int y)
         {
-
             return x - (-y);
         }
 
@@ -37,6 +36,7 @@ namespace ExercitiiSet1
             {
                 result += number;
             }
+
             return result;
         }
     }
