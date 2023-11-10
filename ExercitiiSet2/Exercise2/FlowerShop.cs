@@ -114,7 +114,7 @@
 
             for (int i = 1; i <= days; i++)
             {
-                int dailyTotal = 0;
+                int dailyTotal;
                 Console.WriteLine($"Day {i} of November: ");
 
                 int rosesRevenue = dailyRosesSold * _flowers[0].Price;
